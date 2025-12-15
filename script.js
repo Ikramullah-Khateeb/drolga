@@ -10,7 +10,7 @@ hamburger.addEventListener('click', () => {
 });
 
 // Close mobile menu when clicking on a link
-document.querySelectorAll('.menu a').forEach(link => {
+document.querySelectorAll('.menu').forEach(link => {
     link.addEventListener('click', () => {
         menu.classList.remove('active');
         hamburger.classList.remove('open');
@@ -65,6 +65,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// for animation
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    }else {
+      entry.target.classList.remove('in-view'); // Remove when out of view
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+document.querySelectorAll('.animate-on-scroll,.animate-lift,.animate-card-on-scroll,.animate-image').forEach(el => {
+  observer.observe(el);
+});
 
 
 
+
+document.querySelectorAll(
+  '.animate-on-scroll, .animate-card-on-scroll,.animate-lift, .animate-image, .reveal-left, .reveal-right'
+).forEach(el => {
+  observer.observe(el);
+});
